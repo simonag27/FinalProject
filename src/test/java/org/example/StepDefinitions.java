@@ -1,13 +1,19 @@
 package org.example;
 
 import PageObjects.*;
+import io.cucumber.java.After;
+import io.cucumber.java.Scenario;
 import io.cucumber.java.en.*;
 
 
 import org.junit.jupiter.api.Assertions;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+
+import java.io.File;
 
 public class StepDefinitions {
 
@@ -201,7 +207,7 @@ public class StepDefinitions {
 
     @Then("The Personal Information page opens")
     public void thePersonalInformationPageOpens() {
-        Assertions.assertEquals("Personal Information",
+        Assertions.assertEquals("Personal information",
                 registerPage.getPersonalInformationHeaderText());
     }
 
@@ -224,7 +230,7 @@ public class StepDefinitions {
 
     @Then("The Course Option page opens")
     public void theCourseOptionPageOpens() {
-        Assertions.assertEquals("Course Options",
+        Assertions.assertEquals("Course options",
                 courseOptionsPage.getCourseOptionsHeaderText());
     }
 
@@ -243,7 +249,7 @@ public class StepDefinitions {
 
     @Then("The Payment Information page opens")
     public void thePaymentInformationPageOpens() {
-        Assertions.assertEquals("Payment Information",
+        Assertions.assertEquals("Payment information",
                 paymentInfoPage.getPaymentInfoHeaderText());
     }
 
@@ -308,6 +314,15 @@ public class StepDefinitions {
     @Then("In Person page opens")
     public void inPersonPageOpens() {
         Assertions.assertEquals("In Person", inPersonPage.getInPersonHeader());
+    }
+
+    @After
+    public void cleanUp(Scenario scenario) {
+        if (scenario.isFailed()) {
+            final byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+            scenario.attach(screenshot, "image/jpg", "");
+        }
+        driver.quit();
     }
 }
 

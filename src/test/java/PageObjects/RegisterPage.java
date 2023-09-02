@@ -66,7 +66,6 @@ public class RegisterPage {
         completeUsernameField("CCC");
         completePasswordField("DDD");
         completePasswordConfirmationField("DDD");
-        accessNextButton();
     }
 
     public String getPersonalInformationHeaderText(){

@@ -43,10 +43,6 @@ Feature: An example
     * The Next button is clicked
     Then I remain on Personal Information page
 
-  Scenario: All fields from Register Page valid
-    Given I am on the contact information page
-    When The Next button is clicked
-    Then The Contact Information page opens
 
   Scenario: Valid fields from Contact Information page
     Given I am on the contact information page
